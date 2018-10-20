@@ -1,5 +1,5 @@
 ![Screenshot](/img/jokenpo.png)
-![Screenshot](/img/jokenpogif.png)
+![Screenshot](/img/jokenpogif.gif)
 
 #### Instructions to run
 
