@@ -1,4 +1,3 @@
-![Screenshot](/img/jokenpo.png)
 ![Screenshot](/img/jokenpogif.gif)
 
 #### Instructions to run
