@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "eslint": "^5.7.0",
+    "lodash": "^4.17.11",
     "native-base": "^2.8.1",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",

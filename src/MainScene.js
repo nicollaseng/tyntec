@@ -11,6 +11,7 @@ import Stage from "./Stage";
 import Score from "./Score";
 import Modal from "react-native-modal";
 import { Text, Icon } from "native-base";
+import _ from 'lodash'
 
 class MainScene extends Component {
   constructor(props) {
@@ -21,8 +22,10 @@ class MainScene extends Component {
       computerSelection: " ",
       result: "",
       visibleModal: true,
-      score: 0,
-      start: false
+      counter: 100,
+      start: false,
+      playerScore: 0,
+      computerScore: 0
     };
   }
 
@@ -37,7 +40,7 @@ class MainScene extends Component {
   renderModalContent = () => {
     return (
       <View style={styles.mainContainer}>
-      <Score score={this.props.score} />
+        <Score score={this.props.score} />
         <View style={{ alignSelf: "flex-end", flex: 1, marginTop: 10 }}>
           <TouchableWithoutFeedback
             onPress={() => this.setState({ visibleModal: null })}
@@ -55,16 +58,17 @@ class MainScene extends Component {
           </View>
         </View>
         <View>
-          <Text style={styles.titleText}>  By Nicollas Linhares</Text>
+          <Text style={styles.titleText}> By Nicollas Linhares</Text>
         </View>
       </View>
     );
   };
 
   manageState(userSelection) {
-
-    const { start } = this.state
-    start ? null : this.setState({ visibleModal: true, start: true})
+    const { start, counter, playerScore, computerScore } = this.state;
+    start ? this.setState({counter: counter-1 }) : this.setState({ visibleModal: true, start: true});
+    console.log()
+    _.last(counter.toString()) == 0 ? this.setState({ visibleModal: true }) : null
 
     const computerSelection = new Array();
     computerSelection[0] = "Rock";
@@ -105,11 +109,15 @@ class MainScene extends Component {
       userSelection,
       computerSelection: computerSelection[sort],
       result: res,
-      color: res === "Match" ? "#f7c102" : res === "You Won" ? "#17c8e3" : "red"
+      color: res === "Match" ? "#f7c102" : res === "You Won" ? "#17c8e3" : "red",
+      playerScore: res === "You Won" ? playerScore + 1 : playerScore,
+      computerScore: res === "Game Over" ? computerScore + 1 : computerScore
+
     });
   }
 
   render() {
+    console.log(this.state)
     const resultColor = {
       color: this.state.color
     };
@@ -182,7 +190,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     fontWeight: "500",
-    fontFamily: "Carter One",
+    fontFamily: "Carter One"
   },
   scissors: {
     color: "#fff",
@@ -191,7 +199,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     fontWeight: "500",
-    fontFamily: "Carter One",
+    fontFamily: "Carter One"
   },
   paper: {
     color: "#fff",
@@ -200,7 +208,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     fontWeight: "500",
-    fontFamily: "Carter One",
+    fontFamily: "Carter One"
   },
   mainContainer: {
     flex: 1.0,
@@ -224,7 +232,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Carter One",
     padding: 15,
-    color: '#17c8e3'
+    color: "#17c8e3"
   },
   infoText: {
     fontSize: 16,
