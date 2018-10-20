@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Text } from "native-base";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
 class Stage extends Component {
   jokenpo() {
@@ -21,10 +21,10 @@ class Stage extends Component {
       );
     } else if (selectedOption == "Scissors") {
       return (
-        <Container style={container}>
+        <View style={container}>
           <Text style={computerPlayer}>{player}</Text>
           <Image source={require("../img/scissors.png")} />
-        </Container>
+        </View>
       );
     } else {
       return false;

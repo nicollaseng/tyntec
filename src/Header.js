@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { Container } from "native-base";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
 class Header extends Component {
   render() {
     return (
-      <Container style={styles.container}>
+      <View style={styles.container}>
         <Image
           source={require("../img/logo.png")}
           style={styles.imageStyle}
         />
-      </Container>
+      </View>
     );
   }
 }
@@ -19,11 +19,12 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center"
+    flex:1,
+    alignItems: "center",
+    justifyContent: 'center'
   },
   imageStyle: {
-    width: 380,
-    height: 380
+    width: 300,
+    height: 300
   }
 });

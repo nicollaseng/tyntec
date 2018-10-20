@@ -1,8 +1,14 @@
 import React, { Component } from "react";
-import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
+import {
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+  Image
+} from "react-native";
 import Header from "./Header";
 import Stage from "./Stage";
-import { Container, Text } from "native-base";
+import Modal from "react-native-modal";
+import { Container, Text, Icon } from "native-base";
 
 class MainScene extends Component {
   constructor(props) {
@@ -11,9 +17,44 @@ class MainScene extends Component {
     this.state = {
       userSelection: " ",
       computerSelection: " ",
-      result: ""
+      result: "",
+      visibleModal: true
     };
   }
+
+  renderButton = (text, onPress) => (
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.button}>
+        <Text style={styles.modalText}>{text}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  renderModalContent = () => {
+    return (
+      <View style={styles.mainContainer}>
+        <View style={{ alignSelf: "flex-end", flex: 1, marginTop: 10 }}>
+          <TouchableWithoutFeedback
+            onPress={() => this.setState({ visibleModal: null })}
+          >
+            <Icon type="FontAwesome" name="close" color="#eee" />
+          </TouchableWithoutFeedback>
+        </View>
+        <View style={{ flex: 4 }}>
+          <Text style={styles.titleText}>Made exclusively for </Text>
+          <View style={{ alignItems: "center", padding: 20 }}>
+            <Image
+              source={require("../img/tyntecLogo.jpg")}
+              style={styles.tyntecLogo}
+            />
+          </View>
+        </View>
+        <View>
+          <Text style={styles.titleText}>  By Nicollas Linhares</Text>
+        </View>
+      </View>
+    );
+  };
 
   manageState(userSelection) {
     const computerSelection = new Array();
@@ -64,7 +105,20 @@ class MainScene extends Component {
       color: this.state.color
     };
     return (
-      <Container style={{ justifyContent: "space-around" }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "space-around",
+          backgroundColor: "white"
+        }}
+      >
+        <Modal
+          isVisible={this.state.visibleModal}
+          animationIn="slideInLeft"
+          animationOut="slideOutRight"
+        >
+          {this.renderModalContent()}
+        </Modal>
         <Header />
         <View sytle={styles.buttonPanel}>
           <View>
@@ -93,7 +147,7 @@ class MainScene extends Component {
             player="Computer"
           />
         </View>
-      </Container>
+      </View>
     );
   }
 }
@@ -109,7 +163,8 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     marginTop: 5,
-    marginBottom: 10
+    marginBottom: 10,
+    fontFamily: "Carter One"
   },
   rock: {
     backgroundColor: "#ea2d87",
@@ -117,7 +172,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     padding: 10,
     textAlign: "center",
-    fontWeight: "500"
+    fontWeight: "500",
+    fontFamily: "Carter One"
   },
   scissors: {
     color: "#fff",
@@ -125,7 +181,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     padding: 10,
     textAlign: "center",
-    fontWeight: "500"
+    fontWeight: "500",
+    fontFamily: "Carter One"
   },
   paper: {
     color: "#fff",
@@ -133,6 +190,44 @@ const styles = StyleSheet.create({
     fontSize: 22,
     padding: 10,
     textAlign: "center",
-    fontWeight: "500"
+    fontWeight: "500",
+    fontFamily: "Carter One"
+  },
+  mainContainer: {
+    flex: 1.0,
+    backgroundColor: "#fff",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingHorizontal: 26
+  },
+  shield: {
+    width: 280,
+    height: 280
+  },
+  tyntecLogo: {
+    width: 200,
+    height: 200,
+    resizeMode: "contain"
+  },
+  titleText: {
+    fontSize: 25,
+    textAlign: "center",
+    fontFamily: "Carter One",
+    padding: 15,
+    color: '#17c8e3'
+  },
+  infoText: {
+    fontSize: 16,
+    paddingVertical: 15,
+    textAlign: "justify",
+    fontFamily: "Carter One"
+  },
+  continueButton: {
+    marginTop: 60
+  },
+  textButton: {
+    fontSize: 20,
+    fontFamily: "Carter One"
   }
 });

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -58,6 +57,8 @@
 		F4359309B7BC46E5955F11FB /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEE25C076A0B438D90FCD296 /* rubicon-icon-font.ttf */; };
 		F656E3045A054DC3A492DCB0 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0AA5178A37245D181A7B84C /* AntDesign.ttf */; };
 		FCE35204E5B34BD4B91485A4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AF283367FE5A48A59F5A5821 /* FontAwesome.ttf */; };
+		C80B8B10A36C4EDCB18A4B24 /* CarterOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F33C9BE61FAD4E038A4C78C5 /* CarterOne.ttf */; };
+		CAB38A00B33C4380BA08DC73 /* Carter One.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5CCDFE03500E4718900F09DF /* Carter One.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -398,6 +399,8 @@
 		F49C9F107CC3417FB42C47A0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		FA82BEBE96E6403180D8A05D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		FEE25C076A0B438D90FCD296 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
+		F33C9BE61FAD4E038A4C78C5 /* CarterOne.ttf */ = {isa = PBXFileReference; name = "CarterOne.ttf"; path = "../assets/fonts/CarterOne.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5CCDFE03500E4718900F09DF /* Carter One.ttf */ = {isa = PBXFileReference; name = "Carter One.ttf"; path = "../assets/fonts/Carter One.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,6 +622,8 @@
 				8D5E00C2924440739ACE5B07 /* FontAwesome5_Brands.ttf */,
 				050777E00BD6471D99D7C4A4 /* FontAwesome5_Regular.ttf */,
 				F35B5C60E26743F8B5253643 /* FontAwesome5_Solid.ttf */,
+				F33C9BE61FAD4E038A4C78C5 /* CarterOne.ttf */,
+				5CCDFE03500E4718900F09DF /* Carter One.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1188,6 +1193,8 @@
 				8F6387F3D7D24F1D84A1BE63 /* FontAwesome5_Brands.ttf in Resources */,
 				8573D03FF8914B08BC6980D6 /* FontAwesome5_Regular.ttf in Resources */,
 				00D77BD5C8474E2AA4562551 /* FontAwesome5_Solid.ttf in Resources */,
+				C80B8B10A36C4EDCB18A4B24 /* CarterOne.ttf in Resources */,
+				CAB38A00B33C4380BA08DC73 /* Carter One.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
