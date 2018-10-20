@@ -3,12 +3,14 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import Header from "./Header";
 import Stage from "./Stage";
+import Score from "./Score";
 import Modal from "react-native-modal";
-import { Container, Text, Icon } from "native-base";
+import { Text, Icon } from "native-base";
 
 class MainScene extends Component {
   constructor(props) {
@@ -18,7 +20,9 @@ class MainScene extends Component {
       userSelection: " ",
       computerSelection: " ",
       result: "",
-      visibleModal: true
+      visibleModal: true,
+      score: 0,
+      start: false
     };
   }
 
@@ -33,6 +37,7 @@ class MainScene extends Component {
   renderModalContent = () => {
     return (
       <View style={styles.mainContainer}>
+      <Score score={this.props.score} />
         <View style={{ alignSelf: "flex-end", flex: 1, marginTop: 10 }}>
           <TouchableWithoutFeedback
             onPress={() => this.setState({ visibleModal: null })}
@@ -57,6 +62,10 @@ class MainScene extends Component {
   };
 
   manageState(userSelection) {
+
+    const { start } = this.state
+    start ? null : this.setState({ visibleModal: true, start: true})
+
     const computerSelection = new Array();
     computerSelection[0] = "Rock";
     computerSelection[1] = "Scissors";
@@ -173,7 +182,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     fontWeight: "500",
-    fontFamily: "Carter One"
+    fontFamily: "Carter One",
   },
   scissors: {
     color: "#fff",
@@ -182,7 +191,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     fontWeight: "500",
-    fontFamily: "Carter One"
+    fontFamily: "Carter One",
   },
   paper: {
     color: "#fff",
@@ -191,7 +200,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlign: "center",
     fontWeight: "500",
-    fontFamily: "Carter One"
+    fontFamily: "Carter One",
   },
   mainContainer: {
     flex: 1.0,
