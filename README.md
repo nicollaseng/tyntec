@@ -1,3 +1,5 @@
+![Screenshot](/img/jokenpo.png)
+
 #### Instructions to run
 
 1. Clone this respository
