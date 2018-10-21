@@ -23,18 +23,18 @@ class MainScene extends Component {
         userSelection: null,
         computerSelection: null,
         result: null,
-        visibleModal: true,
-        counter: 8,
+        visibleModal: false,
+        counter: 98,
         start: false,
         playerScore: 0,
         computerScore: 0,
-        tieScore: 0
+        tieScore: 0,
       },
       userSelection: null,
       computerSelection: null,
       result: null,
       visibleModal: true,
-      counter: 8,
+      counter: 98,
       start: false,
       playerScore: 0,
       computerScore: 0,
@@ -70,9 +70,6 @@ class MainScene extends Component {
               style={styles.tyntecLogo}
             />
           </View>
-        </View>
-        <View>
-          <Text style={styles.titleText}> By Nicollas Linhares</Text>
         </View>
       </View>
     );
