@@ -25,7 +25,8 @@ class MainScene extends Component {
       counter: 99,
       start: false,
       playerScore: 0,
-      computerScore: 0
+      computerScore: 0,
+      tieScore: 0
     };
   }
 
@@ -66,10 +67,11 @@ class MainScene extends Component {
   };
 
   counterModal() {
+    const { playerScore, computerScore, tieScore } = this.state;
     return (
-      <View style={styles.mainContainer}>
+      <View style={[styles.mainContainer, { flex: 0.7 }]}>
         <Score score={this.props.score} />
-        <View style={{ alignSelf: "flex-end", flex: 1, marginTop: 10 }}>
+        <View style={{ alignSelf: "flex-end", flex: 0.5, marginTop: 10 }}>
           <TouchableWithoutFeedback
             onPress={() => this.setState({ visibleModal: null })}
           >
@@ -77,27 +79,30 @@ class MainScene extends Component {
           </TouchableWithoutFeedback>
         </View>
         <View style={{ flex: 4 }}>
-          <Text style={styles.titleText}>Made exclusively for </Text>
-          <View style={{ alignItems: "center", padding: 20 }}>
-            <Image
-              source={require("../img/tyntecLogo.jpg")}
-              style={styles.tyntecLogo}
-            />
-          </View>
+          <Text style={styles.scoreText}>Score: </Text>
+          <Text style={styles.titleText}>You:</Text>
+          <Text
+            style={styles.subScoreText}
+          >{`${playerScore} of 100 games`}</Text>
+          <Text style={styles.titleText}>Computer:</Text>
+          <Text
+            style={styles.subScoreText}
+          >{`${computerScore} of 100 games`}</Text>
+          <Text style={styles.titleText}>Tie:</Text>
+          <Text style={styles.subScoreText}>{`${tieScore} of 100 games`}</Text>
         </View>
-        <View>
+        {/* <View>
           <Text style={styles.titleText}> By Nicollas Fulano</Text>
-        </View>
+        </View> */}
       </View>
     );
   }
 
   manageState(userSelection) {
-    const { start, counter, playerScore, computerScore } = this.state;
+    const { start, counter, playerScore, computerScore, tieScore } = this.state;
     start
       ? this.setState({ counter: counter - 1 })
       : this.setState({ visibleModal: true, start: true });
-    console.log();
     _.last(counter.toString()) == 0
       ? this.setState({ visibleModal: true })
       : null;
@@ -141,14 +146,16 @@ class MainScene extends Component {
       userSelection,
       computerSelection: computerSelection[sort],
       result: res,
-      color: res === "Match" ? "#f7c102" : res === "You Won" ? "#17c8e3" : "red",
+      color:
+        res === "Match" ? "#f7c102" : res === "You Won" ? "#17c8e3" : "red",
       playerScore: res === "You Won" ? playerScore + 1 : playerScore,
-      computerScore: res === "Game Over" ? computerScore + 1 : computerScore
+      computerScore: res === "Game Over" ? computerScore + 1 : computerScore,
+      tieScore: res === "Match" ? tieScore + 1 : tieScore
     });
   }
 
   render() {
-    const { counter } = this.state;
+    const { counter, start } = this.state;
     const resultColor = {
       color: this.state.color
     };
@@ -165,7 +172,7 @@ class MainScene extends Component {
           animationIn="slideInLeft"
           animationOut="slideOutRight"
         >
-          {counter == 99 ? this.renderModalContent() : this.counterModal()}
+          {!start ? this.renderModalContent() : this.counterModal()}
         </Modal>
         <Header />
         <View sytle={styles.buttonPanel}>
@@ -263,6 +270,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "Carter One",
     padding: 15,
+    color: "#f7c102"
+  },
+  scoreText: {
+    fontSize: 45,
+    textAlign: "center",
+    fontFamily: "Carter One",
+    color: "#ea2d87"
+  },
+  subScoreText: {
+    fontSize: 25,
+    textAlign: "center",
+    fontFamily: "Carter One",
     color: "#17c8e3"
   },
   infoText: {
