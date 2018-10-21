@@ -84,11 +84,13 @@ class MainScene extends Component {
       <View style={[styles.mainContainer, { flex: 0.9 }]}>
         <Score score={this.props.score} />
         <View style={{ alignSelf: "flex-end", flex: 0.5, marginTop: 10 }}>
-          <TouchableWithoutFeedback
-            onPress={() => this.setState({ visibleModal: null })}
-          >
-            <Icon type="FontAwesome" name="close" color="#eee" />
-          </TouchableWithoutFeedback>
+          {counter != 0 && (
+            <TouchableWithoutFeedback
+              onPress={() => this.setState({ visibleModal: null })}
+            >
+              <Icon type="FontAwesome" name="close" color="#eee" />
+            </TouchableWithoutFeedback>
+          )}
         </View>
         <View style={{ flex: 4 }}>
           <Text style={styles.scoreText}>Score: </Text>
@@ -102,9 +104,9 @@ class MainScene extends Component {
           >{`${computerScore} of 100 games`}</Text>
           <Text style={styles.titleText}>Tie:</Text>
           <Text style={styles.subScoreText}>{`${tieScore} of 100 games`}</Text>
-          <Text
-            style={styles.remainingStyle}
-          >{`REMAINING ${counter === 0 ? counter : counter + 1} GAMES`}</Text>
+          <Text style={styles.remainingStyle}>{`REMAINING ${
+            counter === 0 ? counter : counter + 1
+          } GAMES`}</Text>
           {counter == 0
             ? this.renderButton("Reiniciar!", () =>
                 this.setState({ visibleModal: null, ...reset })
@@ -118,7 +120,7 @@ class MainScene extends Component {
   manageState(userSelection) {
     const { start, counter, playerScore, computerScore, tieScore } = this.state;
     start
-      ? this.setState({ counter: counter === 0 ? counter : counter - 1})
+      ? this.setState({ counter: counter === 0 ? counter : counter - 1 })
       : this.setState({
           visibleModal: true,
           start: true,
