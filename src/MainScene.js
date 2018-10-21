@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import Header from "./Header";
 import Stage from "./Stage";
-import Score from "./Score";
 import Modal from "react-native-modal";
 import { Text, Icon } from "native-base";
 import _ from "lodash";
@@ -54,7 +53,6 @@ class MainScene extends Component {
     const { counter } = this.state;
     return (
       <View style={styles.mainContainer}>
-        <Score score={this.props.score} />
         <View style={{ alignSelf: "flex-end", flex: 1, marginTop: 10 }}>
           <TouchableWithoutFeedback
             onPress={() => this.setState({ visibleModal: null })}
@@ -79,7 +77,6 @@ class MainScene extends Component {
     const { playerScore, computerScore, tieScore, counter, reset } = this.state;
     return (
       <View style={[styles.mainContainer, { flex: 0.9 }]}>
-        <Score score={this.props.score} />
         <View style={{ alignSelf: "flex-end", flex: 0.5, marginTop: 10 }}>
           {counter != 0 && (
             <TouchableWithoutFeedback

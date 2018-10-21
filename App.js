@@ -6,3 +6,5 @@ export default class App extends Component {
     return <MainScene />;
   }
 }
+
+console.disableYellowBox = true;
