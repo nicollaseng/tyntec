@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   View,
   Image,
   Dimensions
@@ -18,11 +19,22 @@ class MainScene extends Component {
     super(props);
 
     this.state = {
-      userSelection: " ",
-      computerSelection: " ",
-      result: "",
+      reset: {
+        userSelection: null,
+        computerSelection: null,
+        result: null,
+        visibleModal: true,
+        counter: 8,
+        start: false,
+        playerScore: 0,
+        computerScore: 0,
+        tieScore: 0
+      },
+      userSelection: null,
+      computerSelection: null,
+      result: null,
       visibleModal: true,
-      counter: 99,
+      counter: 8,
       start: false,
       playerScore: 0,
       computerScore: 0,
@@ -67,9 +79,9 @@ class MainScene extends Component {
   };
 
   counterModal() {
-    const { playerScore, computerScore, tieScore } = this.state;
+    const { playerScore, computerScore, tieScore, counter, reset } = this.state;
     return (
-      <View style={[styles.mainContainer, { flex: 0.7 }]}>
+      <View style={[styles.mainContainer, { flex: 0.9 }]}>
         <Score score={this.props.score} />
         <View style={{ alignSelf: "flex-end", flex: 0.5, marginTop: 10 }}>
           <TouchableWithoutFeedback
@@ -90,10 +102,15 @@ class MainScene extends Component {
           >{`${computerScore} of 100 games`}</Text>
           <Text style={styles.titleText}>Tie:</Text>
           <Text style={styles.subScoreText}>{`${tieScore} of 100 games`}</Text>
+          <Text
+            style={styles.remainingStyle}
+          >{`REMAINING ${counter === 0 ? counter : counter + 1} GAMES`}</Text>
+          {counter == 0
+            ? this.renderButton("Reiniciar!", () =>
+                this.setState({ visibleModal: null, ...reset })
+              )
+            : null}
         </View>
-        {/* <View>
-          <Text style={styles.titleText}> By Nicollas Fulano</Text>
-        </View> */}
       </View>
     );
   }
@@ -101,8 +118,12 @@ class MainScene extends Component {
   manageState(userSelection) {
     const { start, counter, playerScore, computerScore, tieScore } = this.state;
     start
-      ? this.setState({ counter: counter - 1 })
-      : this.setState({ visibleModal: true, start: true });
+      ? this.setState({ counter: counter === 0 ? counter : counter - 1})
+      : this.setState({
+          visibleModal: true,
+          start: true,
+          counter
+        });
     _.last(counter.toString()) == 0
       ? this.setState({ visibleModal: true })
       : null;
@@ -155,7 +176,7 @@ class MainScene extends Component {
   }
 
   render() {
-    const { counter, start } = this.state;
+    const { start } = this.state;
     const resultColor = {
       color: this.state.color
     };
@@ -284,6 +305,13 @@ const styles = StyleSheet.create({
     fontFamily: "Carter One",
     color: "#17c8e3"
   },
+  remainingStyle: {
+    paddingVertical: 10,
+    fontSize: 28,
+    textAlign: "center",
+    fontFamily: "Carter One",
+    color: "red"
+  },
   infoText: {
     fontSize: 16,
     paddingVertical: 15,
@@ -296,5 +324,18 @@ const styles = StyleSheet.create({
   textButton: {
     fontSize: 20,
     fontFamily: "Carter One"
+  },
+  button: {
+    backgroundColor: "#ea2d87",
+    padding: 12,
+    margin: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4
+  },
+  modalText: {
+    color: "white",
+    fontFamily: "Carter One",
+    fontSize: 17
   }
 });
