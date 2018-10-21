@@ -11,7 +11,7 @@ import Stage from "./Stage";
 import Score from "./Score";
 import Modal from "react-native-modal";
 import { Text, Icon } from "native-base";
-import _ from 'lodash'
+import _ from "lodash";
 
 class MainScene extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class MainScene extends Component {
       computerSelection: " ",
       result: "",
       visibleModal: true,
-      counter: 100,
+      counter: 99,
       start: false,
       playerScore: 0,
       computerScore: 0
@@ -38,6 +38,7 @@ class MainScene extends Component {
   );
 
   renderModalContent = () => {
+    const { counter } = this.state;
     return (
       <View style={styles.mainContainer}>
         <Score score={this.props.score} />
@@ -64,11 +65,42 @@ class MainScene extends Component {
     );
   };
 
+  counterModal() {
+    return (
+      <View style={styles.mainContainer}>
+        <Score score={this.props.score} />
+        <View style={{ alignSelf: "flex-end", flex: 1, marginTop: 10 }}>
+          <TouchableWithoutFeedback
+            onPress={() => this.setState({ visibleModal: null })}
+          >
+            <Icon type="FontAwesome" name="close" color="#eee" />
+          </TouchableWithoutFeedback>
+        </View>
+        <View style={{ flex: 4 }}>
+          <Text style={styles.titleText}>Made exclusively for </Text>
+          <View style={{ alignItems: "center", padding: 20 }}>
+            <Image
+              source={require("../img/tyntecLogo.jpg")}
+              style={styles.tyntecLogo}
+            />
+          </View>
+        </View>
+        <View>
+          <Text style={styles.titleText}> By Nicollas Fulano</Text>
+        </View>
+      </View>
+    );
+  }
+
   manageState(userSelection) {
     const { start, counter, playerScore, computerScore } = this.state;
-    start ? this.setState({counter: counter-1 }) : this.setState({ visibleModal: true, start: true});
-    console.log()
-    _.last(counter.toString()) == 0 ? this.setState({ visibleModal: true }) : null
+    start
+      ? this.setState({ counter: counter - 1 })
+      : this.setState({ visibleModal: true, start: true });
+    console.log();
+    _.last(counter.toString()) == 0
+      ? this.setState({ visibleModal: true })
+      : null;
 
     const computerSelection = new Array();
     computerSelection[0] = "Rock";
@@ -112,12 +144,11 @@ class MainScene extends Component {
       color: res === "Match" ? "#f7c102" : res === "You Won" ? "#17c8e3" : "red",
       playerScore: res === "You Won" ? playerScore + 1 : playerScore,
       computerScore: res === "Game Over" ? computerScore + 1 : computerScore
-
     });
   }
 
   render() {
-    console.log(this.state)
+    const { counter } = this.state;
     const resultColor = {
       color: this.state.color
     };
@@ -134,7 +165,7 @@ class MainScene extends Component {
           animationIn="slideInLeft"
           animationOut="slideOutRight"
         >
-          {this.renderModalContent()}
+          {counter == 99 ? this.renderModalContent() : this.counterModal()}
         </Modal>
         <Header />
         <View sytle={styles.buttonPanel}>
